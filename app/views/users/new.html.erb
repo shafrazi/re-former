@@ -10,7 +10,7 @@
   <input type="submit" value="Submit">
 </form> -->
 
-<%= form_tag("/users", method: "post") do %>
+<!-- <%= form_tag("/users", method: "post") do %>
   <%= label_tag(:username, "Username : ") %>
   <%= text_field_tag(:username) %>
   <%= label_tag(:email, "Email : ") %>
@@ -18,4 +18,22 @@
   <%= label_tag(:password, "Password : ") %>
   <%= text_field_tag(:password) %>
   <%= submit_tag("Submit") %>
+<% end %> -->
+
+<%= form_for(@user) do |f| %>
+  <ul>
+    <% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+    <% end %>
+  </ul>
+  
+  <%= f.label :username, "Username : " %>
+  <%= f.text_field :username, placeholder: "User name" %>
+  <%= f.label :email, "Email : " %>
+  <%= f.text_field :email, placeholder: "user@example.com" %>
+  <%= f.label :password, "Password : " %> 
+  <%= f.password_field :password, placeholder: "Password" %>
+  <%= f.submit %>
 <% end %>
